@@ -421,6 +421,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
+html, body{
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 *, ::before, ::after {
   --tw-translate-x: 0;
   --tw-translate-y: 0;
@@ -513,9 +519,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 2.75rem;
 }
 
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
 .gap-x-8 {
   -webkit-column-gap: 2rem;
           column-gap: 2rem;
+}
+
+.gap-x-2 {
+  -webkit-column-gap: 0.5rem;
+          column-gap: 0.5rem;
 }
 
 .bg-brand-color {
@@ -547,6 +566,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 150ms;
 }
 
-.hover\:text-opacity-10:hover {
-  --tw-text-opacity: 0.1;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+.hover\:text-opacity-100:hover {
+  --tw-text-opacity: 1;
 }
