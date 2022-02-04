@@ -1,6 +1,6 @@
 export default function MobileApp() {
   return (
-    <div className="bg-primary-brand-color bg-mobile-app flex justify-between items-center mt-7 rounded-lg text-white">
+    <div className="bg-primary-brand-color bg-mobile-app flex justify-between items-center rounded-lg text-white">
       <div className="flex flex-col gay-y-3 p-10">
         <h3 className="text-2xl font-bold tracking-tight">Getir'i indirin!</h3>
         <p className="font-semibold">İstediğiniz ürünleri dakikalar içinde kapınıza getirelim.</p>
