@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Banners from 'api/banners.json'
 import Title from "./ui/Title";
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
-
+import { useWindowWidth } from '@react-hook/window-size'
 
 function NextBtn({ className, style, onClick }) {
   return (
@@ -26,6 +26,7 @@ function PrevBtn({ className, style, onClick }) {
 export default function Campaigns() {
 
   const [banners, setBanners] = useState([]);
+  const windowWidth = useWindowWidth();
 
   useEffect(() => {
     setBanners(Banners)
@@ -69,14 +70,14 @@ export default function Campaigns() {
   };
 
   return (
-    <div className="container mx-auto md:py-8">
+    <div className="container mx-auto md:pt-8" >
       <div className="hidden md:block">
         <Title>Kampanyalar</Title>
       </div>
-      <Slider {...settings} className="-mx-4">
+      <Slider {...settings} className="md:-mx-2">
         {banners && banners.map((banner, index) => (
           <div key={index}>
-            <picture className="block px-4">
+            <picture className="block md:px-2">
               <img src={banner.image} className="md:rounded-lg" />
             </picture>
           </div>
