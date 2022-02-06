@@ -19,7 +19,7 @@ function App() {
       <HeroSection />
       <Categories />
       {windowWidth > 768 && <Campaigns />}
-      <div className="container mx-auto grid gap-y-6">
+      <div className="container mx-auto grid gap-y-6 pt-8">
         <Favorites />
         <MobileApp />
         <Cards />
