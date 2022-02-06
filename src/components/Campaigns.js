@@ -69,13 +69,15 @@ export default function Campaigns() {
   };
 
   return (
-    <div className="container mx-auto py-8">
-      <Title>Kampanyalar</Title>
+    <div className="container mx-auto md:py-8">
+      <div className="hidden md:block">
+        <Title>Kampanyalar</Title>
+      </div>
       <Slider {...settings} className="-mx-4">
         {banners && banners.map((banner, index) => (
           <div key={index}>
             <picture className="block px-4">
-              <img src={banner.image} className="rounded-lg" />
+              <img src={banner.image} className="md:rounded-lg" />
             </picture>
           </div>
         ))}
