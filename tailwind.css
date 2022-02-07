@@ -14,14 +14,18 @@
     }
 }
 
-.flag-select{
-    @apply !pb-0
+.flag-select {
+    @apply  !pb-0
 }
 
 #rfs-btn {
-    @apply h-14 border-2 border-gray-200 transition-colors rounded bg-white hover:border-primary-brand-color
+    @apply h-14 border-2 border-gray-200 transition-colors rounded bg-white hover: border-primary-brand-color
 }
 
 .flag-select button>span span:nth-child(2) {
     @apply text-sm pl-2
+}
+
+.ReactCollapse--collapse {
+    @apply transition-all
 }
