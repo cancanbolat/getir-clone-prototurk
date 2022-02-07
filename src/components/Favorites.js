@@ -1,15 +1,15 @@
 import Title from "./ui/Title";
-import Products from 'api/products.json'
 import { useState, useEffect } from "react";
 import ProductItem from "./ui/ProductItem";
-import { api } from "api/api";
+import axios from "axios";
+import { BASE_API_URL } from "constants/constants";
 
 export default function Favorites() {
 
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    api().get('products/getall').then((response) => {
+    axios.get(BASE_API_URL + 'products/getall').then((response) => {
       setProducts(response.data);
     }).catch((error) => {
       console.log(error);

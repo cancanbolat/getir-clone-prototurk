@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import categoryData from 'api/categories.json'
 import Category from "./ui/Category";
 import Title from "./ui/Title";
-import { api } from "api/api";
+import axios from "axios";
+import { BASE_API_URL } from "constants/constants";
 
 export default function Categories() {
 
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
-    api().get('categories/getall').then((resposne) => {
+    axios.get(BASE_API_URL + 'categories/getall').then((resposne) => {
       setCategories(resposne.data)
     }).catch((error) => {
       console.log(error);

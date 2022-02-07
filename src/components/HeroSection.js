@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useWindowWidth } from '@react-hook/window-size'
 import LogInButton from "./ui/form/LogInButton";
 import SignInButton from "./ui/form/SignInButton";
-import { api } from "api/api";
+import axios from "axios";
+import { BASE_API_URL } from "constants/constants";
 
 export default function HeroSection() {
 
@@ -49,17 +50,16 @@ export default function HeroSection() {
 
     if (isUser) {
       //login
-      api().post('users/login', {
+      axios.post(BASE_API_URL + 'users/login', {
         email: user.email,
         password: user.password
       }).then((response) => {
-        console.log(response.data);
-        //set data to localStorage 
+        localStorage.setItem("user", JSON.stringify(response.data));
         //router push home page for all products
       })
     } else {
       //signin
-      api().post('users/register', {
+      axios.post(BASE_API_URL + 'users/register', {
         userName: (user.firstName.toLocaleLowerCase() + user.lastName.toLocaleLowerCase()).trim(),
         email: user.email,
         password: user.password
