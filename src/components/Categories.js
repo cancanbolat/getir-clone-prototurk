@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import categoryData from 'api/categories.json'
 import Category from "./ui/Category";
 import Title from "./ui/Title";
+import { api } from "api/api";
 
 export default function Categories() {
 
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
-    //istek
-    setTimeout(() => {
-      setCategories(categoryData);
-    }, 1000);
+    api().get('categories/getall').then((resposne) => {
+      setCategories(resposne.data)
+    }).catch((error) => {
+      console.log(error);
+    })
   }, [])
 
   return (

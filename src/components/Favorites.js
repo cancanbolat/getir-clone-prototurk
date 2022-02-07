@@ -2,13 +2,18 @@ import Title from "./ui/Title";
 import Products from 'api/products.json'
 import { useState, useEffect } from "react";
 import ProductItem from "./ui/ProductItem";
+import { api } from "api/api";
 
 export default function Favorites() {
 
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    setProducts(Products);
+    api().get('products/getall').then((response) => {
+      setProducts(response.data);
+    }).catch((error) => {
+      console.log(error);
+    })
   }, [])
 
   return (
