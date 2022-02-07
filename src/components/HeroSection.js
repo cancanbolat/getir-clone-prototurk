@@ -1,22 +1,15 @@
 import Slider from "react-slick";
-import ReactFlagsSelect from 'react-flags-select'
-import { useState } from "react";
-import { FaFacebook } from 'react-icons/fa'
+import { useState, useEffect } from "react";
 import { useWindowWidth } from '@react-hook/window-size'
+import LogInButton from "./ui/form/LogInButton";
+import SignInButton from "./ui/form/SignInButton";
+import { api } from "api/api";
 
 export default function HeroSection() {
 
-  const [selected, setSelected] = useState('TR')
+  const [isUser, setIsUser] = useState(false)
 
   const windowWidth = useWindowWidth();
-
-  const phones = {
-    US: '+1',
-    DE: '+50',
-    TR: '+90',
-    IT: '+7',
-    IN: '+45',
-  }
 
   const settings = {
     dots: false,
@@ -28,6 +21,56 @@ export default function HeroSection() {
     autoplaySpeed: 3500,
     cssEase: 'linear'
   };
+
+  //login or register form toggle
+  const toggleUserForm = () => {
+    setIsUser(!isUser)
+  }
+
+  //user form values
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
+  });
+
+  //user form method
+  const onInputChange = (event) => {
+    setUser({
+      ...user,
+      [event.target.name]: event.target.value
+    })
+  }
+
+  //form submit method
+  const onFormSubmit = (event) => {
+    event.preventDefault();
+
+    if (isUser) {
+      //login
+      api().post('users/login', {
+        email: user.email,
+        password: user.password
+      }).then((response) => {
+        console.log(response.data);
+        //set data to localStorage 
+        //router push home page for all products
+      })
+    } else {
+      //signin
+      api().post('users/register', {
+        userName: (user.firstName.toLocaleLowerCase() + user.lastName.toLocaleLowerCase()).trim(),
+        email: user.email,
+        password: user.password
+      }).then((response) => {
+        console.log(response.data);
+        //set data to localStorage 
+        //router push home page for all products
+      })
+    }
+  }
+
 
   return (
     <div className="">
@@ -55,28 +98,43 @@ export default function HeroSection() {
         <div className="w-full md:w-[400px] md:rounded-lg bg-gray-100 p-6">
           <h4 className="text-primary-brand-color text-center font-semibold mb-4">Giriş yap veya kayıt ol</h4>
           <div className="grid gap-y-3">
-            <div className="flex gap-x-2">
-              <ReactFlagsSelect
-                countries={Object.keys(phones)}
-                customLabels={phones}
-                placeholder="Select Language"
-                onSelect={code => setSelected(code)}
-                selected={selected}
-                className="flags-select"
-              />
+            {/* Inputs */}
+            <div className="flex flex-col gap-y-3">
+              <div className="flex gap-x-2">
+                {/* FirstName */}
+                <label className={`${isUser ? 'hidden' : ''}  flex-1 relative group block cursor-pointer`}>
+                  <input value={user.firstName} onChange={onInputChange} name="firstName" required type="text" className="peer h-14 px-4 border-2 border-gray-200 rounded-lg w-full transition-colors focus:border-primary-brand-color group-hover:border-primary-brand-color outline-none text-sm pt-2" />
+                  <span className="absolute top-0 left-0 h-full px-4 flex items-center text-sm text-gray-500 transition-all peer-focus:h-7 peer-focus:text-primary-brand-color peer-focus:text-xs peer-valid:h-7 peer-valid:text-primary-brand-color peer-valid:text-xs">İsim</span>
+                </label>
+                {/* LastName */}
+                <label className={`${isUser ? 'hidden' : ''}  flex-1 relative group block cursor-pointer`}>
+                  <input value={user.lastName} onChange={onInputChange} name="lastName" required type="text" className="peer h-14 px-4 border-2 border-gray-200 rounded-lg w-full transition-colors focus:border-primary-brand-color group-hover:border-primary-brand-color outline-none text-sm pt-2" />
+                  <span className="absolute top-0 left-0 h-full px-4 flex items-center text-sm text-gray-500 transition-all peer-focus:h-7 peer-focus:text-primary-brand-color peer-focus:text-xs peer-valid:h-7 peer-valid:text-primary-brand-color peer-valid:text-xs">Soyisim</span>
+                </label>
+              </div>
+              {/* Email */}
               <label className="flex-1 relative group block cursor-pointer">
-                <input required className="peer h-14 px-4 border-2 border-gray-200 rounded-lg w-full transition-colors focus:border-primary-brand-color group-hover:border-primary-brand-color outline-none text-sm pt-2" />
-                <span className="absolute top-0 left-0 h-full px-4 flex items-center text-sm text-gray-500 transition-all peer-focus:h-7 peer-focus:text-primary-brand-color peer-focus:text-xs peer-valid:h-7 peer-valid:text-primary-brand-color peer-valid:text-xs">Telefon Numarası</span>
+                <input value={user.email} onChange={onInputChange} name="email" required type="text" className="peer h-14 px-4 border-2 border-gray-200 rounded-lg w-full transition-colors focus:border-primary-brand-color group-hover:border-primary-brand-color outline-none text-sm pt-2" />
+                <span className="absolute top-0 left-0 h-full px-4 flex items-center text-sm text-gray-500 transition-all peer-focus:h-7 peer-focus:text-primary-brand-color peer-focus:text-xs peer-valid:h-7 peer-valid:text-primary-brand-color peer-valid:text-xs">Email</span>
+              </label>
+              {/* Password */}
+              <label className="flex-1 relative group block cursor-pointer">
+                <input value={user.password} onChange={onInputChange} name="password" required type="password" className="peer h-14 px-4 border-2 border-gray-200 rounded-lg w-full transition-colors focus:border-primary-brand-color group-hover:border-primary-brand-color outline-none text-sm pt-2" />
+                <span className="absolute top-0 left-0 h-full px-4 flex items-center text-sm text-gray-500 transition-all peer-focus:h-7 peer-focus:text-primary-brand-color peer-focus:text-xs peer-valid:h-7 peer-valid:text-primary-brand-color peer-valid:text-xs">Şifre</span>
               </label>
             </div>
-            <button className="bg-brand-yellow transition-colors hover:bg-primary-brand-color hover:text-brand-yellow h-12 flex items-center justify-center rounded-md w-full text-sm font-semibold text-primary-brand-color">
-              Telefon numarası ile devam et
-            </button>
+            {/* End Inputs */}
+            {
+              isUser
+                ? <LogInButton onClickAction={onFormSubmit} />
+                : <SignInButton onClickAction={onFormSubmit} />
+            }
             <hr className="h-[1px] bg-gray-300 my-2" />
-            <button className="bg-blue-700 bg-opacity-10 px-4 transition-colors hover:bg-blue-700 hover:text-white h-12 flex items-center justify-center rounded-md w-full text-sm font-semibold text-blue-700">
-              <FaFacebook size={24} />
-              <span className="mx-auto">Facebook ile devam et</span>
-            </button>
+            {
+              isUser
+                ? <SignInButton onClickAction={toggleUserForm} />
+                : <LogInButton onClickAction={toggleUserForm} />
+            }
           </div>
         </div>
       </div>

@@ -1,18 +1,8 @@
 import { BiGlobe } from 'react-icons/bi'
-import { RiUserFill, RiUserAddFill } from 'react-icons/ri'
 import { HiLocationMarker } from 'react-icons/hi'
 import { IoIosArrowForward } from 'react-icons/io'
-import { useState } from 'react';
 
 export default function Header() {
-
-  const [showModal, setShowModal] = useState(false)
-
-  function toggle() {
-    console.log("sdbkfsald");
-    setShowModal(!showModal)
-  }
-
   return (
     <>
       <div className="bg-brand-color">
@@ -25,14 +15,6 @@ export default function Header() {
               <BiGlobe size={20} />
               Türkçe (TR)
             </a>
-            <a href="#" className="text-white flex items-center gap-x-2 transition-all text-opacity-80 hover:text-opacity-100">
-              <RiUserFill size={20} />
-              Giriş Yap
-            </a>
-            <a onClick={() => setShowModal(true)} className="text-white flex items-center gap-x-2 transition-all text-opacity-80 hover:text-opacity-100">
-              <RiUserAddFill size={20} />
-              <p onClick={() => setShowModal(true)} className='cursor-pointer'>Kayıt Ol</p>
-            </a>
           </nav>
         </div>
       </div>
@@ -43,60 +25,6 @@ export default function Header() {
         </div>
         <IoIosArrowForward size={18} className="text-primary-brand-color" />
       </div>
-      {/* ADD POST MODAL */}
-      {showModal &&
-        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-          <div className="shadow w-5/12 my-6 mx-auto max-w-3xl rounded-lg bg-white mt-2 leading-relaxed">
-            <section className="post flex flex-col">
-              <header className="text-center font-semibold border-b p-4">
-                <p className="">Create Post</p>
-                <span className="float-right p-0 cursor-pointer text-center text-2xl text-gray-400 bg-gray-200 font-normal w-8 h-8 rounded-full"
-                  onClick={() => setShowModal(false)}>X</span>
-              </header>
-              <form encType='multipart/form-data' className="m-4 flex align-center flex-col rounded-b-lg">
-                <div className="content flex align-center">
-                  <div className="details flex align-center flex-col cursor-pointer">
-                    <div className="privacy flex align-center justify-between cursor-pointer mt-0.5">
-                      <i className="fas fa-user-friends"></i>
-                      <span>Friends</span>
-                      <i className="fas fa-caret-down"></i>
-                    </div>
-                  </div>
-                </div>
-                {/* Content */}
-                <textarea placeholder="What's on your mind, Can ?" required name="content"
-                  className="text-xl h-40 mt-7 outline-none w-full border-none align-center justify-between resize-none"></textarea>
-                {/* End Content */}
-                {/* End Preview Image */}
-                <div className="theme-emoji flex align-center justify-between mb-1">
-                  <img src="icons/theme.svg" alt="" />
-                  <img src="icons/smile.svg" alt="" />
-                </div>
-                <div className="rounded-lg border-gray-400 options flex align-center h-14 justify-between border-solid border p-1.5">
-                  <p className="p-2.5 font-semibold text-gray-500">Add to your post</p>
-                  <ul className="list flex align-center justify-center p-2.5">
-                    <li className="h-11 w-11 rounded-2/4 cursor-pointer"><img src="./icons/gallery.svg" alt="" />
-                      <input
-                        className="file-input"
-                        type="file"
-                        name="formFile[]"
-                        multiple
-                      />
-                    </li>
-                    <li className="h-11 w-11 rounded-2/4 cursor-pointer"><img src="./icons/tag.svg" alt="" /></li>
-                    <li className="h-11 w-11 rounded-2/4 cursor-pointer"><img src="./icons/emoji.svg" alt="" /></li>
-                    <li className="h-11 w-11 rounded-2/4 cursor-pointer"><img src="./icons/mic.svg" alt="" /></li>
-                    <li className="h-11 w-11 rounded-2/4 cursor-pointer"><img src="./icons/more.svg" alt="" /></li>
-                  </ul>
-                </div>
-                <button type="submit" className="bg-blue-500 text-white rounded p-1 mt-4">Post</button>
-              </form>
-            </section>
-          </div>
-        </div>
-      }
-      {showModal && <div className="opacity-30 fixed inset-0 z-40 bg-black"></div>}
-      {/* END ADD POST MODAL */}
     </>
   );
 }
