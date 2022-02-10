@@ -1,32 +1,39 @@
 import Header from "components/Header";
-import HeroSection from "components/HeroSection";
-import Categories from "components/Categories";
-import Campaigns from "components/Campaigns";
-import Favorites from "components/Favorites";
-import MobileApp from "components/MobileApp";
-import Cards from "components/Cards";
 import Footer from "components/Footer";
-import { useWindowWidth } from '@react-hook/window-size'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
+import { useSelector } from "react-redux";
+import Home from "components/Home";
+import { routes } from "routes/routes";
 
 function App() {
 
-  const windowWidth = useWindowWidth();
+  const { user } = useSelector(state => state.auth)
 
   return (
-    <>
+    <Router>
       <Header />
-      {windowWidth <= 768 && <Campaigns />}
-      <HeroSection />
-      <Categories />
-      {windowWidth > 768 && <Campaigns />}
-      <div className="container mx-auto grid gap-y-6 pt-8">
-        <Favorites />
-        <MobileApp />
-        <Cards />
-      </div>
-
+      <Switch>
+        {routes.map((route, index) => (
+          <Route
+            key={index}
+            exact={route.exact}
+            path={route.path}
+            render={() => {
+              if (route.auth && !user) {
+                return <Redirect to="/" />
+              } else {
+                return <route.component />
+              }
+            }} />
+        ))}
+      </Switch>
       <Footer />
-    </>
+    </Router>
   );
 }
 
