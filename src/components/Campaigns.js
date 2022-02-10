@@ -1,6 +1,5 @@
 import Slider from "react-slick";
 import { useState, useEffect } from "react";
-import Banners from 'api/banners.json'
 import Title from "./ui/Title";
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { useWindowWidth } from '@react-hook/window-size'
@@ -23,13 +22,13 @@ function PrevBtn({ className, style, onClick }) {
   );
 }
 
-export default function Campaigns() {
+export default function Campaigns({ campaignDatas }) {
 
   const [banners, setBanners] = useState([]);
   const windowWidth = useWindowWidth();
 
   useEffect(() => {
-    setBanners(Banners)
+    setBanners(campaignDatas)
   }, [])
 
   const settings = {
