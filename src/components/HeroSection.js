@@ -5,13 +5,23 @@ import LogInButton from "./ui/form/LogInButton";
 import SignInButton from "./ui/form/SignInButton";
 import axios from "axios";
 import { BASE_API_URL } from "constants/constants";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "store/auth";
 
 export default function HeroSection() {
 
+  //login or register form
   const [isUser, setIsUser] = useState(false)
 
+  //windowWidth for responsive components
   const windowWidth = useWindowWidth();
 
+  //state (redux) auth
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  //react-slick (slider) settings
   const settings = {
     dots: false,
     infinite: true,
@@ -54,8 +64,10 @@ export default function HeroSection() {
         email: user.email,
         password: user.password
       }).then((response) => {
-        localStorage.setItem("user", JSON.stringify(response.data));
-        //router push home page for all products
+        //set state
+        dispatch(login(response.data))
+        //router push home page for all products (redirect profile page for now)
+        history.push('/profile')
       })
     } else {
       //signin
