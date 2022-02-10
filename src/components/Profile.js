@@ -1,10 +1,8 @@
-import React from 'react';
-
 export default function Profile() {
   return (
       <>
-        <div>
-            <p>profile page</p>
+        <div className="container p-10">
+            <h1 className="text-2xl text-blue-700">profile page</h1>
         </div>
       </>
   );
