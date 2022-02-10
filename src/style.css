@@ -607,6 +607,16 @@ html, body {
   margin-right: -11rem;
 }
 
+.-mx-52 {
+  margin-left: -13rem;
+  margin-right: -13rem;
+}
+
+.-mx-48 {
+  margin-left: -12rem;
+  margin-right: -12rem;
+}
+
 .mb-6 {
   margin-bottom: 1.5rem;
 }
@@ -645,6 +655,18 @@ html, body {
 
 .mt-3 {
   margin-top: 0.75rem;
+}
+
+.-ml-20 {
+  margin-left: -5rem;
+}
+
+.ml-40 {
+  margin-left: 10rem;
+}
+
+.ml-20 {
+  margin-left: 5rem;
 }
 
 .block {
@@ -1208,6 +1230,11 @@ html, body {
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+
+.py-7 {
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
 }
 
 .pt-5 {
@@ -1837,6 +1864,10 @@ html, body {
 
   .xl\:grid-cols-8 {
     grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 

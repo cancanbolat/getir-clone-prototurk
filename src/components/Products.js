@@ -1,17 +1,21 @@
 import Campaigns from "./Campaigns";
 import campaignDatas from 'api/campaigns.json'
 import categoryDatas from 'api/categories.json'
+import productDatas from 'api/products.json'
 import { useEffect, useState } from "react";
 import Favorites from "./Favorites";
 import Title from "./ui/Title";
 import { Link } from "react-router-dom";
+import ProductItem from "./ui/ProductItem";
 
 export default function Products() {
 
     const [categories, setCategories] = useState([])
+    const [products, setProducts] = useState([])
 
     useEffect(() => {
         setCategories(categoryDatas)
+        setProducts(productDatas)
     }, [])
 
     return (
@@ -33,8 +37,13 @@ export default function Products() {
                         </div>
                     </div>
                     {/* Products */}
-                    <div className="-mx-36">
-                        <Favorites />
+                    <div className="-mx-40">
+                        <Title extraClass={`-mx-5 md:mx-0`}>Ürünler</Title>
+                        <div className="grid grid-cols-3 md:grid-cols-4 gap-0.1 rounded-lg overflow-hidden">
+                            {products.length && products.map((product, index) => (
+                                <ProductItem key={index} product={product} />
+                            ))}
+                        </div>
                     </div>
                     {/* Basket */}
                     <div className="hidden md:block w-[300px]">
