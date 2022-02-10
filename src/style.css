@@ -928,16 +928,16 @@ html, body {
   padding-right: 1.5rem;
 }
 
-.pt-8 {
-  padding-top: 2rem;
-}
-
 .pt-5 {
   padding-top: 1.25rem;
 }
 
 .pt-2 {
   padding-top: 0.5rem;
+}
+
+.pt-8 {
+  padding-top: 2rem;
 }
 
 .pt-6 {
@@ -1027,6 +1027,16 @@ html, body {
 .text-blue-700 {
   --tw-text-opacity: 1;
   color: rgb(29 78 216 / var(--tw-text-opacity));
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.text-red-700 {
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
 }
 
 .text-opacity-80 {
