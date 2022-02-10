@@ -26,7 +26,10 @@ function App() {
             render={() => {
               if (route.auth && !user) {
                 return <Redirect to="/" />
-              } else {
+              } else if (user && route.path === '/') {
+                return <Redirect to="/products" />
+              }
+              else {
                 return <route.component />
               }
             }} />
