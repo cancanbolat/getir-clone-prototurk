@@ -66,6 +66,7 @@ export default function HeroSection() {
       }).then((response) => {
         //set state
         dispatch(login(response.data))
+        console.log(response.data);
         //router push home page for all products (redirect profile page for now)
         history.push('/profile')
       })
